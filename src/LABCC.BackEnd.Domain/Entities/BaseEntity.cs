@@ -1,6 +1,6 @@
 ﻿namespace LABCC.BackEnd.Domain.Entities;
 
-internal abstract class BaseEntity
+public abstract class BaseEntity
 {
   public virtual long Id { get; set; }
   public virtual long UpdatedAt { get; set; }
