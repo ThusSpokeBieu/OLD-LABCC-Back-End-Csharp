@@ -4,9 +4,9 @@ using LABCC.BackEnd.Domain.Entities.Usuarios;
 
 namespace LABCC.BackEnd.Infrastructure.Config;
 
-public class MapperConfiguration : Profile 
+public class AutoMapperConfiguration : Profile 
 {
-  public MapperConfiguration() 
+  public AutoMapperConfiguration() 
   {
     CreateMap<UsuarioDTO, Usuario>();
   }

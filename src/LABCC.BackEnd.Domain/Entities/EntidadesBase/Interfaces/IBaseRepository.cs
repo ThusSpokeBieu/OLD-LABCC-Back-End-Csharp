@@ -1,5 +1,5 @@
 ﻿namespace LABCC.BackEnd.Domain.Entities.EntidadesBase.Interfaces;
-public interface IBaseRepository<TEntity> where TEntity : EntidadeBase
+public interface IBaseRepository<TEntity> where TEntity : AggregateRoot
 {
     public Task<IList<TEntity>> Select();
     public Task<TEntity> Select(long id);

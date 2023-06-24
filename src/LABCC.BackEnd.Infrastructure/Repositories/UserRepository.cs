@@ -1,6 +1,6 @@
-﻿using LABCC.BackEnd.Domain.Entities.People;
-using LABCC.BackEnd.Domain.Entities.Users;
-using LABCC.BackEnd.Domain.Entities.Users.Interfaces;
+﻿using LABCC.BackEnd.Domain.Entities.Pessoas;
+using LABCC.BackEnd.Domain.Entities.Usuarios;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
 using LABCC.BackEnd.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,64 +15,40 @@ public class UserRepository : IUsuarioRepository
     _db = db;
   }
 
-  async public Task<IList<Usuario>> Select() => await _db.Users
-    .Where(user => user.IsActive)
-    .ToListAsync();
+  async public Task<IList<Usuario>> Select() => await _db.Usuarios.ToListAsync();
 
-  async public Task<Usuario?> Select(long id) => await _db.Users
-    .FirstOrDefaultAsync(user => user.Id == id && user.IsActive);
+  async public Task<Usuario?> Select(long id) => await _db.Usuarios
+    .FirstOrDefaultAsync(user => user.Id == id);
 
   async public Task Insert(Usuario obj)
   {
-    await _db.Users.AddAsync(obj);
+    await _db.Usuarios.AddAsync(obj);
     await _db.SaveChangesAsync();
   }
 
   async public Task Update(long id, Usuario obj)
   {
-    Usuario? user = await _db.Users.FindAsync(id);
-    
-    if (user == null)
-    {
-      throw new ArgumentException("User not found by id");
-    }
-
-    user.Name = obj.Name;
-    user.Email = obj.Email;
-    user.Document = obj.Document;
-    user.BirthDate = obj.BirthDate;
-    user.Gender = obj.Gender;
-    user.Telephone = obj.Telephone;
-    user.UserType = obj.UserType;
-    user.IsActive = obj.IsActive;
-    user.UpdatedAt = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-
+    Usuario? user = await _db.Usuarios.FindAsync(id) ?? throw new ArgumentException("User not found by id");
     await _db.SaveChangesAsync();
   }
 
   async public Task Delete(long id)
   {
-    Usuario? user = await _db.Users.FirstOrDefaultAsync(user => user.Id == id);
-
-    if (user == null || !user.IsActive)
-    {
-      throw new ArgumentException("User does not exist or is already inactive");
-    }
-
-    user.IsActive = false;
+    Usuario? user = await _db.Usuarios.FirstOrDefaultAsync(user => user.Id == id) ?? throw new ArgumentException("User does not exist or is already inactive");
+    _db.Usuarios.Remove(user);
 
     await _db.SaveChangesAsync();
   }
 
   async public Task Activate(long id)
   {
-    Usuario? user = await _db.Users
+    Usuario? user = await _db.Usuarios
       .FirstOrDefaultAsync(user => user.Id == id) ?? throw new ArgumentException("User does not exist");
 
-    if (user.IsActive) 
-      throw new ArgumentException($"The user: ${user.Name}, id: ${user.Id} is already active.");
+    if (user.StatusId == 1) 
+      throw new ArgumentException($"The user: ${user.Nome}, id: ${user.Id} is already active.");
 
-    user.IsActive = true;
+    user.StatusId = 1;
 
     await _db.SaveChangesAsync();
   }
