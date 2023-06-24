@@ -1,5 +1,6 @@
 using LABCC.BackEnd.Infrastructure.Config;
 using LABCC.BackEnd.Infrastructure.Context;
+using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,8 +14,8 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
 var connectionString = $"Server={dbHost},{dbPort};Database={dbName};User Id={dbUser};Password={dbPassword};Trusted_Connection=False;TrustServerCertificate=true;MultipleActiveResultSets=true";
 
+builder.Services.AddScoped<UserRepository>();
 builder.Services.AddDbContext<MsSqlContext>(options => options.UseSqlServer(connectionString));
-//builder.Services.AddDbContext<MsSqlContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -28,7 +29,6 @@ using (var scope = app.Services.CreateScope())
 
   var context = services.GetRequiredService<MsSqlContext>();
   context.Database.EnsureCreated();
-  DbSeed.Initialize(context);
 }
 
 app.UseHttpsRedirection();
