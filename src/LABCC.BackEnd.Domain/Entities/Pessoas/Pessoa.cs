@@ -15,11 +15,11 @@ public class Pessoa : AggregateRoot
   [Description("Gênero da pessoa ou usuário: 1 - Masculino, 2 - Feminino, 3 - Outro")]
   public byte GeneroId { get; set; }
 
-  public Genero Genero { get; set; }
+  public Genero? Genero { get; set; }
   
   [Required]
   [Description("Data de nascimento do usuário, é um DateTime de formato: YYYY-mm-DD")]
-  public DateTime DataDeNascimento { get; set; }
+  public DateOnly DataDeNascimento { get; set; }
 
   [Required]
   [Description("Documentos do usuário, CPF ou CNPJ. Formatos: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX', ou apenas numeros.")]
