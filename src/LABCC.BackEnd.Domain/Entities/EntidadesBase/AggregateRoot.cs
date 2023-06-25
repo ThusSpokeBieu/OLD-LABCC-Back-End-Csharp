@@ -21,6 +21,6 @@ public abstract class AggregateRoot : Entidade
   [Description("Flag indicando se a entidade está ativa: 0 - Inativo, 1 - Ativo.")]
   public virtual byte StatusId { get; set; }
 
-  public virtual Status Status { get; set; }
+  public virtual Status? Status { get; set; }
 
 }

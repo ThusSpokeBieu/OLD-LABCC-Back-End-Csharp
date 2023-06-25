@@ -1,5 +1,4 @@
-﻿using LABCC.BackEnd.Domain.Entities.Pessoas;
-using LABCC.BackEnd.Domain.Entities.Usuarios;
+﻿using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
 using LABCC.BackEnd.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +14,10 @@ public class UserRepository : IUsuarioRepository
     _db = db;
   }
 
-  async public Task<IList<Usuario>> Select() => await _db.Usuarios.ToListAsync();
+  async public Task<IList<Usuario>> Select()
+  {
+    return await _db.Usuarios.ToListAsync();
+  }
 
   async public Task<Usuario?> Select(long id) => await _db.Usuarios
     .FirstOrDefaultAsync(user => user.Id == id);

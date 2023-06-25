@@ -1,8 +1,7 @@
-﻿using LABCC.BackEnd.Application.DTO.Users;
+﻿using AutoMapper;
 using LABCC.BackEnd.Application.DTO.Usuarios;
-using Microsoft.AspNetCore.Http.HttpResults;
+using LABCC.BackEnd.Domain.Entities.Usuarios;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace LABCC.BackEnd.Application.Controllers;
 
@@ -10,7 +9,13 @@ namespace LABCC.BackEnd.Application.Controllers;
 [ApiController]
 public class UsuarioController : ControllerBase
 {
-  // GET api/<UserController>/5
+  private readonly IMapper Mapper;
+
+  public UsuarioController(IMapper mapper)
+  {
+    Mapper = mapper;
+  }
+
   [HttpGet("{id}")]
   public string Get(int id)
   {
@@ -19,10 +24,10 @@ public class UsuarioController : ControllerBase
 
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsuarioDTOResponse))]
-  //[ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(Conflict))]
-  public UsuarioDTO Post([FromBody] UsuarioDTO value)
+  [ProducesResponseType(StatusCodes.Status409Conflict)]
+  public IActionResult Post([FromBody] UsuarioDTO value)
   {
-    return value;
+    return Ok(Mapper.Map<Usuario>(value));
   }
 
   // PUT api/<UserController>/5

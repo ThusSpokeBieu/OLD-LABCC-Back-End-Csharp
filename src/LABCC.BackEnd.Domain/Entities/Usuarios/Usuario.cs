@@ -16,6 +16,6 @@ public class Usuario : Pessoa
   [Description("Tipo de Usuário, 1 - Administrador, 2 - Gerente, 3 - Criador, 4 - Outro")]
   public byte TipoDeUsuarioId { get; set; }
 
-  public TipoDeUsuario TipoDeUsuario { get; set; }
+  public TipoDeUsuario? TipoDeUsuario { get; set; }
 
 }

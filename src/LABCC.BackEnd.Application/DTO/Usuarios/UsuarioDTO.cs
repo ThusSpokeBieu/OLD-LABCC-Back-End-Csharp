@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using Gmess.SharperAnnotationsForDataType.Attributes;
 using LABCC.BackEnd.Domain.Validators.DataTypeAttributes;
 
-namespace LABCC.BackEnd.Application.DTO.Users;
+namespace LABCC.BackEnd.Application.DTO.Usuarios;
 
-public class UsuarioDTO
+public class UsuarioDTO 
 {
   [Required(ErrorMessage = "{0} é obrigatório")]
   [EmailAddress(ErrorMessage = "Por favor, insira um {0} correto.")]
@@ -46,7 +46,7 @@ public class UsuarioDTO
   [TipoDeUsuario]
   [MaxLength(15, ErrorMessage = " {0} deve possuir no máximo 15 caracteres. ")]
   [DefaultValue("Criador")]
-  public string UserType { get; set; }
+  public string TipoDeUsuario { get; set; }
 
   [Required(ErrorMessage = "Status do Usuário é obrigatório.")]
   [StatusDoUsuario]
