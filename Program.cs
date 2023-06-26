@@ -1,4 +1,3 @@
-using MapperConfig = LABCC.BackEnd.Application.Mappers.UsuarioMapper;
 using LABCC.BackEnd.Application.UseCases;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
@@ -6,6 +5,9 @@ using LABCC.BackEnd.Infrastructure.Config;
 using LABCC.BackEnd.Infrastructure.Context;
 using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using LABCC.BackEnd.Domain.Entities.Colecoes.Interfaces;
+using LABCC.BackEnd.Domain.Entities.Colecoes;
+using LABCC.BackEnd.Application.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +22,16 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 var connectionString = $"Server={dbHost},{dbPort};Database={dbName};User Id={dbUser};Password={dbPassword};Trusted_Connection=False;TrustServerCertificate=true;MultipleActiveResultSets=true";
 builder.Services.AddDbContext<MsSqlContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddTransient<IUsuarioService, UsuarioService>();
+builder.Services.AddTransient<UsuarioRepository>();
+builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<UsuarioUseCases>();
+builder.Services.AddAutoMapper(typeof(UsuarioMapper));
 
-builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+builder.Services.AddTransient<ColecaoRepository>();
+builder.Services.AddTransient<ColecaoService>();
+builder.Services.AddTransient<ColecaoUseCases>();
+builder.Services.AddAutoMapper(typeof(ColecaoMapper));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

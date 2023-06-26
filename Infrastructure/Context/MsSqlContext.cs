@@ -2,6 +2,8 @@
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.ValueObjects;
 using LABCC.BackEnd.Infrastructure.DbMapping;
+using LABCC.BackEnd.Infrastructure.DbMapping.VO;
+using LABCC.BackEnd.Domain.Entities.Colecoes;
 
 namespace LABCC.BackEnd.Infrastructure.Context;
 
@@ -14,6 +16,8 @@ public class MsSqlContext : DbContext
 
   #region DB SETS
   public DbSet<Usuario> Usuarios { get; set; }
+  public DbSet<Colecao> Colecoes { get; set; }
+
   public DbSet<Status> Status { get; set; }
   public DbSet<Genero> Generos { get; set; }
   public DbSet<TipoDeUsuario> TiposDeUsuarios { get; set; }
@@ -25,6 +29,7 @@ public class MsSqlContext : DbContext
   public readonly TipoDeUsuarioDbMapping tipoDeUsuarioMapping = new();
   private readonly EstacoesDbMapping estacoesMapping = new();
   public readonly UsuariosDbMapping usuariosMapping = new();
+  public readonly ColecoesDbMapping colecoesMapping = new();
   #endregion
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +47,7 @@ public class MsSqlContext : DbContext
 
     #region Entity Table Creation
     modelBuilder.Entity<Usuario>().ToTable("Usuarios");
+    modelBuilder.Entity<Colecao>().ToTable("Coleções");
     #endregion
 
     #region VO Mapping
@@ -53,6 +59,7 @@ public class MsSqlContext : DbContext
 
     #region Entity Mapping
     usuariosMapping.Build(modelBuilder);
+    colecoesMapping.Build(modelBuilder);
     #endregion
   }
 

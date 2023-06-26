@@ -33,4 +33,6 @@ public class Colecao : AggregateRoot
 
   [Required]
   public EstacoesDoAno Estacao { get; set; }
+
+
 }

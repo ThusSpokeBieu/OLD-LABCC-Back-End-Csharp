@@ -11,8 +11,9 @@ public class Status : ValueObject
   public byte Id { get; set; }
 
   [Required]
-  [StatusDoUsuario]
+  [Status]
   [DefaultValue("Ativo")]
+  [JsonPropertyName("status")]
   public override string Value { 
     get => base.Value; 
     set => base.Value = value; }

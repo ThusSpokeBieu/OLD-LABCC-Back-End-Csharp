@@ -35,8 +35,9 @@ public class ColecoesDbMapping
     builder.Entity<Colecao>()
       .HasOne(c => c.Responsavel)
       .WithMany()
-      .HasForeignKey(c => c.ResponsavelId);
-
+      .HasForeignKey(c => c.ResponsavelId)
+      .OnDelete(DeleteBehavior.Restrict);
+      
     builder.Entity<Colecao>()
       .Property(c => c.ResponsavelId)
       .HasColumnOrder(2)
@@ -66,8 +67,7 @@ public class ColecoesDbMapping
       .Property(c => c.AnoDeLancamento)
       .HasColumnOrder(5)
       .HasComment("É o ano de lançamento da coleção")
-      .HasColumnType("int(4000)")
-      .IsRequired();
+      .HasColumnType("int");
 
     builder.Entity<Colecao>()
       .Property(c => c.Orcamento)
@@ -115,6 +115,7 @@ public class ColecoesDbMapping
     {
         new Colecao
         {
+            Id = 1,
             NomeDaColecao = "LABFashion Coast",
             Marca = "Solstice Couture",
             EstacaoId = (byte) EstacoesEnum.VERÃO,
@@ -124,6 +125,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 2,
             NomeDaColecao = "Midnight Elegance",
             Marca = "Aurora Vogue",
             EstacaoId = (byte) EstacoesEnum.INVERNO,
@@ -133,6 +135,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 3,
             NomeDaColecao = "Mythical Glam",
             Marca = "Aphrodite Designs",
             EstacaoId = (byte) EstacoesEnum.PRIMAVERA,
@@ -142,6 +145,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 4,
             NomeDaColecao = "Celestial Chic",
             Marca = "Celestia Fashion House",
             EstacaoId = (byte) EstacoesEnum.OUTONO,
@@ -151,6 +155,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 5,
             NomeDaColecao = "Radiant Reflections",
             Marca = "Sterling Runway",
             EstacaoId = (byte) EstacoesEnum.VERÃO,
@@ -160,6 +165,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 6,
             NomeDaColecao = "Coastal Breeze",
             Marca = "Solstice Couture",
             EstacaoId = (byte) EstacoesEnum.VERÃO,
@@ -169,6 +175,7 @@ public class ColecoesDbMapping
         },
         new Colecao
         {
+            Id = 7, 
             NomeDaColecao = "Enchanted Forest",
             Marca = "Aurora Vogue",
             EstacaoId = (byte) EstacoesEnum.PRIMAVERA,

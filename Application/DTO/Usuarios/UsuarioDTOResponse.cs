@@ -47,7 +47,7 @@ public class UsuarioDTOResponse
   public string TipoDeUsuario { get; set; }
 
   [Required(ErrorMessage = "Status do Usuário é obrigatório.")]
-  [StatusDoUsuario]
+  [Status]
   [DefaultValue("Ativo")]
   public string StatusDoUsuario { get; set; }
 }

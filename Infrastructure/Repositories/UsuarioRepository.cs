@@ -1,7 +1,7 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 using LABCC.BackEnd.Domain.Enum;
-using LABCC.BackEnd.Domain.Params;
 using LABCC.BackEnd.Infrastructure.Context;
 using LABCC.BackEnd.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -132,7 +132,6 @@ public class UsuarioRepository : IUsuarioRepository
               @params.DataDeNascimento.Value.Year,
               @params.DataDeNascimento.Value.Month,
               @params.DataDeNascimento.Value.Day);
-
 
     await _db.SaveChangesAsync();
   }
