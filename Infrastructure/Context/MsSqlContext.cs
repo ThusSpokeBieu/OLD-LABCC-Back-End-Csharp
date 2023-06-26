@@ -12,32 +12,48 @@ public class MsSqlContext : DbContext
 
   }
 
+  #region DB SETS
   public DbSet<Usuario> Usuarios { get; set; }
   public DbSet<Status> Status { get; set; }
   public DbSet<Genero> Generos { get; set; }
   public DbSet<TipoDeUsuario> TiposDeUsuarios { get; set; }
+  #endregion
 
+  #region MAPPINGS
   public readonly GeneroDbMapping generoMapping = new();
   public readonly StatusDbMapping statusMapping = new();
   public readonly TipoDeUsuarioDbMapping tipoDeUsuarioMapping = new();
+  private readonly EstacoesDbMapping estacoesMapping = new();
   public readonly UsuariosDbMapping usuariosMapping = new();
+  #endregion
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
 
     modelBuilder.HasDefaultSchema("Entity");
+
+    #region VO Table Creation
     modelBuilder.Entity<Status>().ToTable("Status", "VO");
     modelBuilder.Entity<Genero>().ToTable("Generos", "VO");
     modelBuilder.Entity<TipoDeUsuario>().ToTable("TiposDeUsuario", "VO");
+    modelBuilder.Entity<EstacoesDoAno>().ToTable("EstaçõesDoAno", "VO");
+    #endregion
 
+    #region Entity Table Creation
     modelBuilder.Entity<Usuario>().ToTable("Usuarios");
+    #endregion
 
+    #region VO Mapping
     generoMapping.Build(modelBuilder);
     statusMapping.Build(modelBuilder);
     tipoDeUsuarioMapping.Build(modelBuilder);
+    estacoesMapping.Build(modelBuilder);
+    #endregion
 
+    #region Entity Mapping
     usuariosMapping.Build(modelBuilder);
+    #endregion
   }
 
 }
