@@ -63,8 +63,9 @@ public class UsuarioService : IUsuarioService
     return null;
   }
 
-  public Task<Usuario> Update(long id, Usuario dto)
+  async public Task<Usuario> Update(long id, UsuarioParams param)
   {
-    throw new NotImplementedException();
+    await Repo.Update(id, param);
+    return await Repo.Select(id);
   }
 }

@@ -3,12 +3,13 @@ using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Utils;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Enum;
+using LABCC.BackEnd.Domain.Params;
 
 namespace LABCC.BackEnd.Application.Mappers;
 
-public class AutoMapper : Profile
+public class UsuarioMapper : Profile
 {
-  public AutoMapper()
+  public UsuarioMapper()
   {
     CreateMap<UsuarioDTO, Usuario>()
       .ForMember(dest => dest.CpfOuCnpj,
@@ -58,7 +59,8 @@ public class AutoMapper : Profile
       
       .ForMember(dest => dest.DataDeNascimento,
         opt => opt.MapFrom(src => DateOnly.FromDateTime(src.DataDeNascimento)));
-    
+
+    CreateMap<UsuarioParamsWithoutDefault, UsuarioParams>();
 
   }
 }

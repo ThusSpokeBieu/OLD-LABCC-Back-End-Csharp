@@ -1,5 +1,6 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Enum;
+using LABCC.BackEnd.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace LABCC.BackEnd.Infrastructure.DbMapping;
@@ -24,7 +25,10 @@ public class UsuariosDbMapping
       .HasComment("É o documento do usuário (CPF ou CNPJ), apenas digitos numéricos.")
       .HasColumnType("varchar(18)")
       .HasMaxLength(18)
-      .IsRequired(true);
+      .IsRequired(true)
+      .HasConversion(
+          value => RegexConst.NotNumericalDigitRegex().Replace(value, ""),
+          value => value);
 
     builder.Entity<Usuario>()
       .Property(u => u.Email)
@@ -55,7 +59,10 @@ public class UsuariosDbMapping
       .HasComment("Telefone do usuário")
       .HasColumnType("varchar(15)")
       .HasMaxLength(15)
-      .IsRequired();
+      .IsRequired()
+      .HasConversion(
+          value => RegexConst.NotNumericalDigitRegex().Replace(value, ""),
+          value => value);
 
 
     builder.Entity<Usuario>()

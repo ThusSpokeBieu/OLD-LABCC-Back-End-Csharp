@@ -22,7 +22,7 @@ public class UsuarioDTOResponse
   public string Nome { get; set; }
 
   [Required(ErrorMessage = "{0} é obrigatório, ")]
-  [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ válido (apenas números), formato 'XXXXXXXXXXX' ou 'XXXXXXXXXXXXXX'.")]
+  [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ realmente válido (apenas números), formato 'XXXXXXXXXXX' ou 'XXXXXXXXXXXXXX'.")]
   [DefaultValue("36620375308")]
   public string CpfOuCnpj { get; set; }
 

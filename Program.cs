@@ -1,4 +1,4 @@
-using MapperConfig = LABCC.BackEnd.Application.Mappers.AutoMapper;
+using MapperConfig = LABCC.BackEnd.Application.Mappers.UsuarioMapper;
 using LABCC.BackEnd.Application.UseCases;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;

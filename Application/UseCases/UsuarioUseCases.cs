@@ -20,11 +20,12 @@ namespace LABCC.BackEnd.Application.UseCases;
       Mapper = mapper;
     }
 
-    async public Task<ICollection<UsuarioDTOResponse>> GetAll()
+  async public Task<ICollection<UsuarioDTOResponse>> GetAll(UsuarioParamsWithoutDefault? param)
     {
       try
       {
-        var usuarioLista = await Service.SelectAll();
+        var mappedParam = Mapper.Map<UsuarioParams>(param);
+        var usuarioLista = await Service.SelectAllByQueryParams(mappedParam);
         return Mapper.Map<List<UsuarioDTOResponse>>(usuarioLista);
 
       } catch (Exception e)
@@ -70,6 +71,20 @@ namespace LABCC.BackEnd.Application.UseCases;
       var user = await Service.SelectOneByQueryParams(param);
       if (user == null) return null;
       return Mapper.Map<UsuarioDTOResponse>(user);
+    }
+    catch (Exception e)
+    {
+      throw new Exception($"{e.Message}");
+    }
+  }
+
+  async public Task<UsuarioDTOResponse> Update(long id, UsuarioParams param)
+  {
+    try
+    {
+      await Service.Update(id, param);
+      var updatedUser = await Service.SelectOneById(id);
+      return Mapper.Map<UsuarioDTOResponse>(updatedUser);
     }
     catch (Exception e)
     {

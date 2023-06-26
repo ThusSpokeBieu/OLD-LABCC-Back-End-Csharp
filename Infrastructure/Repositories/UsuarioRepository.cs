@@ -1,5 +1,6 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
+using LABCC.BackEnd.Domain.Enum;
 using LABCC.BackEnd.Domain.Params;
 using LABCC.BackEnd.Infrastructure.Context;
 using LABCC.BackEnd.Utils;
@@ -24,6 +25,8 @@ public class UsuarioRepository : IUsuarioRepository
       .Include(u => u.Status)
       .Include(u => u.TipoDeUsuario);
 
+  public async Task<Usuario?> Select(long id) => await _db.Usuarios.FindAsync(id);
+
   public IQueryable<Usuario> Select(UsuarioParams @params)
   {
     IQueryable<Usuario> query = _db.Usuarios
@@ -34,28 +37,28 @@ public class UsuarioRepository : IUsuarioRepository
     if(@params.Id.HasValue) query = query.Where(u => u.Id == @params.Id);
     
     if(!@params.Nome.IsNullOrEmpty()) query = query
-        .Where(u => u.Nome.ToLower().Equals(@params.Nome.ToLower()));
+        .Where(u => u.Nome.ToLower().Equals(@params.Nome!.ToLower()));
 
     if(!@params.Email.IsNullOrEmpty()) query = query
-        .Where(u => u.Nome.ToLower().Equals(@params.Email.ToLower()));
+        .Where(u => u.Email.ToLower().Equals(@params.Email!.ToLower()));
 
     if (!@params.CpfOuCnpj.IsNullOrEmpty()) query = query
         .Where(u => u.CpfOuCnpj
-          .Equals(NotNumeric.Replace(@params.CpfOuCnpj, "")));
+          .Equals(NotNumeric.Replace(@params.CpfOuCnpj!, "")));
 
     if (!@params.Telefone.IsNullOrEmpty()) query = query
         .Where(u => u.Telefone
-          .Equals(NotNumeric.Replace(@params.Telefone, "")));
+          .Equals(NotNumeric.Replace(@params.Telefone!, "")));
 
     if (!@params.Genero.IsNullOrEmpty()) query = query
-        .Where(u => u.Genero.Value.ToLower().Equals(@params.Genero.ToLower()));
+        .Where(u => u.Genero.Value.ToLower().Equals(@params.Genero!.ToLower()));
 
     if (!@params.Status.IsNullOrEmpty()) query = query
-        .Where(u => u.Status.Value.ToLower().Equals(@params.Status.ToLower()));
+        .Where(u => u.Status.Value.ToLower().Equals(@params.Status!.ToLower()));
 
     if (!@params.TipoDeUsuario.IsNullOrEmpty()) query = query
         .Where(u => u.TipoDeUsuario.Value
-            .ToLower().Equals(@params.TipoDeUsuario.ToLower()));
+            .ToLower().Equals(@params.TipoDeUsuario!.ToLower()));
 
     if (@params.TipoDeUsuarioId.HasValue) query = query
         .Where(u => u.TipoDeUsuarioId == @params.TipoDeUsuarioId);
@@ -96,9 +99,41 @@ public class UsuarioRepository : IUsuarioRepository
     }
   }
 
-  async public Task Update(long id, Usuario obj)
+  async public Task Update(long id, UsuarioParams @params)
   {
-    Usuario? user = await _db.Usuarios.FindAsync(id) ?? throw new ArgumentException("User not found by id");
+    Usuario? user = await _db.Usuarios.FindAsync(id) ?? throw new ArgumentException("Usuário não foi encontrado");
+    
+    if (!@params.Nome.IsNullOrEmpty()) 
+      user.Nome = @params.Nome!;
+
+    if (!@params.Email.IsNullOrEmpty())
+      user.Email = @params.Email!;
+
+    if (!@params.CpfOuCnpj.IsNullOrEmpty())
+      user.CpfOuCnpj = NotNumeric.Replace(@params.CpfOuCnpj!, "");
+
+    if (!@params.Telefone.IsNullOrEmpty())
+      user.Telefone = NotNumeric.Replace(@params.Telefone!, "");
+
+    if (!@params.Genero.IsNullOrEmpty())
+      user.GeneroId = (byte) (GeneroEnum) StringEnumConverter
+        .StringToEnum(@params.Genero!, typeof(GeneroEnum));
+
+    if (!@params.Status.IsNullOrEmpty())
+      user.StatusId = (byte) (StatusEnum) StringEnumConverter
+        .StringToEnum(@params.Status!, typeof(StatusEnum));
+
+    if (!@params.TipoDeUsuario.IsNullOrEmpty())
+      user.TipoDeUsuarioId = (byte) (TipoDeUsuarioEnum) StringEnumConverter
+        .StringToEnum(@params.TipoDeUsuario!, typeof(TipoDeUsuarioEnum));
+    
+    if (@params.DataDeNascimento.HasValue)
+      user.DataDeNascimento = new DateTime(
+              @params.DataDeNascimento.Value.Year,
+              @params.DataDeNascimento.Value.Month,
+              @params.DataDeNascimento.Value.Day);
+
+
     await _db.SaveChangesAsync();
   }
 

@@ -21,7 +21,7 @@ public class UsuarioDTO
 
   [Required(ErrorMessage = "{0} é obrigatório, ")]
   [MaxLength(18, ErrorMessage = " {0} deve possuir no máximo 18 caracteres. ")]
-  [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ válido do formato: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX'.")]
+  [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ REALMENTE VÁLIDO do formato: 'XXX.XXX.XXX-XX', 'XX.XXX.XXX/XXXX.XX' ou apenas númerico.")]
   [DefaultValue("366.203.753-08")]
   public string CpfOuCnpj { get; set; }
 

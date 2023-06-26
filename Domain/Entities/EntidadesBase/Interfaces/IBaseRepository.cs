@@ -6,8 +6,9 @@ public interface IBaseRepository<TEntity, TParams>
                                           where TParams : IParams
 {
   IQueryable<TEntity> Select();
+  Task<TEntity> Select(long id);
   IQueryable<TEntity> Select(TParams param);
   Task Insert(TEntity obj);
-  Task Update(long id, TEntity obj);
+  Task Update(long id, TParams obj);
   Task Delete(long id);
 }
