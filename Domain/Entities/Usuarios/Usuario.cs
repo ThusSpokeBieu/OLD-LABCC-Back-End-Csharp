@@ -1,4 +1,4 @@
-﻿using LABCC.BackEnd.Domain.Entities.Pessoas;
+﻿using LABCC.BackEnd.Domain.Entities.EntidadesBase;
 using LABCC.BackEnd.Domain.ValueObjects;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

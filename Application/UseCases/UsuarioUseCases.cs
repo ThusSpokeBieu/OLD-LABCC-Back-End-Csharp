@@ -2,25 +2,25 @@
 using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
-using LABCC.BackEnd.Domain.Params;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Application.UseCases;
 
-  public class UsuarioUseCases
+public class UsuarioUseCases
   {
 
-    private readonly IUsuarioService Service;
+    private readonly UsuarioService Service;
     private readonly IMapper Mapper;
 
     public UsuarioUseCases(
-      IUsuarioService service, 
+      UsuarioService service, 
       IMapper mapper)
     {
       Service = service;
       Mapper = mapper;
     }
 
-  async public Task<ICollection<UsuarioDTOResponse>> GetAll(UsuarioParamsWithoutDefault? param)
+    async public Task<ICollection<UsuarioDTOResponse>> GetAll(UsuarioParamsWithoutDefault? param)
     {
       try
       {

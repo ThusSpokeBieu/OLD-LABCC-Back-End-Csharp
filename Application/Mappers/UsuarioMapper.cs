@@ -3,7 +3,7 @@ using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Utils;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Enum;
-using LABCC.BackEnd.Domain.Params;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Application.Mappers;
 

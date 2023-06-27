@@ -1,13 +1,14 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
-using LABCC.BackEnd.Domain.Params;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
+using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LABCC.BackEnd.Domain.Entities.Usuarios;
 public class UsuarioService : IUsuarioService
 {
-  private readonly IUsuarioRepository Repo;
+  private readonly UsuarioRepository Repo;
 
-  public UsuarioService(IUsuarioRepository repo)
+  public UsuarioService(UsuarioRepository repo)
   {
     Repo = repo;
   }
@@ -28,7 +29,7 @@ public class UsuarioService : IUsuarioService
     return await Repo.Select().ToListAsync();
   }
 
-  async public Task<Usuario> SelectOneById(long id)
+  async public Task<Usuario?> SelectOneById(long id)
   {
     var param = new UsuarioParams { Id = id };
     var found = await Repo.Select(param).FirstOrDefaultAsync();
@@ -37,7 +38,7 @@ public class UsuarioService : IUsuarioService
     return null;
   }
 
-  async public Task<Usuario> SelectOneByCpfOrCnpj(string cpfOuCnpj)
+  async public Task<Usuario?> SelectOneByCpfOrCnpj(string cpfOuCnpj)
   {
     var param = new UsuarioParams { CpfOuCnpj = cpfOuCnpj };
     var found = await Repo.Select(param).FirstOrDefaultAsync();
@@ -63,7 +64,7 @@ public class UsuarioService : IUsuarioService
     return null;
   }
 
-  async public Task<Usuario> Update(long id, UsuarioParams param)
+  async public Task<Usuario?> Update(long id, UsuarioParams param)
   {
     await Repo.Update(id, param);
     return await Repo.Select(id);
