@@ -49,7 +49,7 @@ public class UsuarioDTO
   public string TipoDeUsuario { get; set; }
 
   [Required(ErrorMessage = "Status do Usuário é obrigatório.")]
-  [StatusDoUsuario]
+  [Status]
   [MaxLength(10, ErrorMessage = " {0} deve possuir no máximo 10 caracteres. ")]
   [DefaultValue("Ativo")]
   public string StatusDoUsuario { get; set; }

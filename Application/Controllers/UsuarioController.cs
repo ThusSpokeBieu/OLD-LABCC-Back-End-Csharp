@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using LABCC.BackEnd.Application.DTO.Usuarios;
+﻿using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Application.UseCases;
+using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 using LABCC.BackEnd.Domain.Exceptions;
-using LABCC.BackEnd.Domain.Params;
 using LABCC.BackEnd.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,7 +62,7 @@ public class UsuarioController : ControllerBase
     if (usuario == null) return NotFound(new NotFoundException("Usuário não foi encontrado pelo Identificador."));
 
     var usuarioAtualizado = await UseCase.Update(id, value);
-    if (usuario == null) return BadRequest(new BadRequestException("Algo deu errado durante a requisição"));
+    if (usuarioAtualizado == null) return BadRequest(new BadRequestException("Algo deu errado durante a requisição"));
 
     return Ok(usuarioAtualizado);
   }
@@ -78,6 +77,7 @@ public class UsuarioController : ControllerBase
     {
       var usuario = await UseCase.GetById(id);
       if (usuario == null) return NotFound(new NotFoundException("Usuário não foi encontrado pelo Identificador."));
+      if (usuario.StatusDoUsuario.ToLower() == status.Value.ToLower()) return Conflict(new ConflictException($"Coleção já está {usuario.StatusDoUsuario}"));
 
       var param = new UsuarioParams { Status = status.Value };
 
