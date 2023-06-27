@@ -2,6 +2,9 @@
 
 Aplicação para estudo desenvolvida durante o curso DevInHouse - turma Audaces. Trata-se de uma simulação de API Rest de um serviço web do setor de modas, onde é possivel gerenciar e fazer operações com: usuários, coleções e modelos de roupa.
 
+- [Video de Apresentação do Projeto](https://drive.google.com/drive/folders/1PXS0Swgk3zV_UU9n9cF9ZqXFpZfXZR9W?usp=sharing)
+- [Trello da aplicação](https://trello.com/invite/b/mKBgG416/ATTI3585936ef5ef89c622a9269152308c9066228D90/lab-clothing-collection-back-end)
+
 ## Indice
 - [Estudo de Caso](estudo-de-caso)
 - [Dependencias e Tecnologias](dependencias-e-tecnologias)
