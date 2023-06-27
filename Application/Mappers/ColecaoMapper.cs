@@ -40,6 +40,17 @@ public class ColecaoMapper : Profile
           opt => opt.MapFrom(
               src => src.Status.Value));
 
+    CreateMap<Colecao, ColecaoDTOResponseOnlyId>()
+
+      .ForMember(
+          dest => dest.Estacao,
+          opt => opt.MapFrom(
+              src => src.Estacao.Value))
+
+      .ForMember(
+          dest => dest.Status,
+          opt => opt.MapFrom(
+              src => src.Status.Value));
   }
 
 }

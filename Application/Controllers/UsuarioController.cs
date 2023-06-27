@@ -1,6 +1,5 @@
 ﻿using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Application.UseCases;
-using LABCC.BackEnd.Domain.Entities.Colecoes;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 using LABCC.BackEnd.Domain.Exceptions;
 using LABCC.BackEnd.Domain.ValueObjects;

@@ -1,13 +1,12 @@
 using LABCC.BackEnd.Application.UseCases;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
-using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
 using LABCC.BackEnd.Infrastructure.Config;
 using LABCC.BackEnd.Infrastructure.Context;
 using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using LABCC.BackEnd.Domain.Entities.Colecoes.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Colecoes;
 using LABCC.BackEnd.Application.Mappers;
+using LABCC.BackEnd.Domain.Entities.Modelos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +26,15 @@ builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<UsuarioUseCases>();
 builder.Services.AddAutoMapper(typeof(UsuarioMapper));
 
-
 builder.Services.AddTransient<ColecaoRepository>();
 builder.Services.AddTransient<ColecaoService>();
 builder.Services.AddTransient<ColecaoUseCases>();
 builder.Services.AddAutoMapper(typeof(ColecaoMapper));
+
+builder.Services.AddTransient<ModeloRepository>();
+builder.Services.AddTransient<ModeloService>();
+builder.Services.AddTransient<ModeloUseCases>();
+builder.Services.AddAutoMapper(typeof(ModeloMapper));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

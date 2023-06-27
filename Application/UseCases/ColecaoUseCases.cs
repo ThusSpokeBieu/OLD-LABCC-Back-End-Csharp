@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using LABCC.BackEnd.Application.DTO.Colecoes;
-using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Colecoes;
 using LABCC.BackEnd.Domain.Entities.Colecoes.Params;
-using LABCC.BackEnd.Domain.Entities.EntidadesBase.Interfaces;
-using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Application.UseCases;
 

@@ -1,12 +1,9 @@
 ﻿using LABCC.BackEnd.Application.DTO.Colecoes;
-using LABCC.BackEnd.Application.DTO.Usuarios;
 using LABCC.BackEnd.Application.UseCases;
 using LABCC.BackEnd.Domain.Entities.Colecoes.Params;
-using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 using LABCC.BackEnd.Domain.Exceptions;
 using LABCC.BackEnd.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace LABCC.BackEnd.Application.Controllers;
 

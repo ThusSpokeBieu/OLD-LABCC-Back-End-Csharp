@@ -1,8 +1,6 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Colecoes;
-using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Enum;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace LABCC.BackEnd.Infrastructure.DbMapping;
 
