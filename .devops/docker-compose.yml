@@ -4,7 +4,7 @@ services:
   # mssql
   labccDb:
     container_name: labcc-mssql
-    restart: no
+    restart: always
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       MSSQL_SA_PASSWORD: ${DB_PASSWORD}
@@ -12,42 +12,9 @@ services:
       MSSQL_PID: "Developer"
       MSSQL_AGENT_ENABLED: "true"
     ports:
-      - "1433:1433"
-    networks:
-      - labcc_network
-  
-  #sonarqube
-  labcc-sonarqube:
-    image: sonarqube:latest
-    container_name: backend_sonarqube
-    ports:
-      - "9000:9000"
-    networks:
-      - labcc_network
-    environment:
-      SONARQUBE_JDBC_USERNAME: ${SONARQUBE_USERNAME} 
-      SONARQUBE_JDBC_PASSWORD: ${SONARQUBE_PASSWORD} 
-      SONAR_JDBC_URL: ${SONAR_JDBC_URL}
-  
-  #labcc-backend
-  labcc-dotnet-backend:
-    build:
-      context: ../
-      dockerfile: ./.devops/dockerfile.aspnet
-      args:
-        - PROJECT_NAME=LABCC.BackEnd
-        - PROJECT_PATH=./
-    env_file:
-      - ./.env
-    container_name: labcc-dotnet-backend
-    ports:
-      - "${LABCC_BACKEND_PORT}:80" # Mapeamento da porta do contêiner para a porta local (80)
-    networks:
-      - labcc_network
-    depends_on:
-      - labccDb
-      - labcc-sonarqube
+      - "${DB_PORT}:1433"
+    volumes:
+      - sql-storage:/var/opt/mssql
 
-networks:
-  labcc_network:
-    driver: bridge
+volumes:
+  sql-storage:
