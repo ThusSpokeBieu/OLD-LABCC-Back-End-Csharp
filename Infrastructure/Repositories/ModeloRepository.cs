@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace LABCC.BackEnd.Infrastructure.Repositories;
 
-public class ModeloRepository : IModeloRepository
+public sealed class ModeloRepository : IModeloRepository
 {
 
   private readonly MsSqlContext _db;

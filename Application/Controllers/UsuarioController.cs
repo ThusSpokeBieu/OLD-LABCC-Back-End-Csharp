@@ -1,5 +1,5 @@
 ﻿using LABCC.BackEnd.Application.DTO.Usuarios;
-using LABCC.BackEnd.Application.UseCases;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 using LABCC.BackEnd.Domain.Exceptions;
 using LABCC.BackEnd.Domain.ValueObjects;
@@ -9,11 +9,11 @@ namespace LABCC.BackEnd.Application.Controllers;
 
 [Route("api/usuarios")]
 [ApiController]
-public class UsuarioController : ControllerBase
+public sealed class UsuarioController : ControllerBase
 {
-  private readonly UsuarioUseCases UseCase;
+  private readonly IUsuarioUseCases UseCase;
 
-  public UsuarioController(UsuarioUseCases useCase)
+  public UsuarioController(IUsuarioUseCases useCase)
   {
     UseCase = useCase;
   }
@@ -90,8 +90,6 @@ public class UsuarioController : ControllerBase
       throw new Exception(e.Message);
     }
   }
-
-
 
   // DELETE api/<UserController>/5
   // [HttpDelete("{id}")]

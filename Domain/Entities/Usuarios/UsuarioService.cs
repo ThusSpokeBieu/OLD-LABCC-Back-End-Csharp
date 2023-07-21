@@ -1,14 +1,13 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
-using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LABCC.BackEnd.Domain.Entities.Usuarios;
-public class UsuarioService : IUsuarioService
+public sealed class UsuarioService : IUsuarioService
 {
-  private readonly UsuarioRepository Repo;
+  private readonly IUsuarioRepository Repo;
 
-  public UsuarioService(UsuarioRepository repo)
+  public UsuarioService(IUsuarioRepository repo)
   {
     Repo = repo;
   }
@@ -69,4 +68,14 @@ public class UsuarioService : IUsuarioService
     await Repo.Update(id, param);
     return await Repo.Select(id);
   }
+
+    public Task<Usuario?> FindFirstByParams(UsuarioParams @params)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IList<Usuario>> SelectAll(UsuarioParams @params)
+    {
+        throw new NotImplementedException();
+    }
 }

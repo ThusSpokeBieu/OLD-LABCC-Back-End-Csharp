@@ -1,5 +1,5 @@
 ﻿using LABCC.BackEnd.Application.DTO.Colecoes;
-using LABCC.BackEnd.Application.UseCases;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Colecoes.Params;
 using LABCC.BackEnd.Domain.Exceptions;
 using LABCC.BackEnd.Domain.ValueObjects;
@@ -9,12 +9,12 @@ namespace LABCC.BackEnd.Application.Controllers;
 
 [Route("api/colecoes")]
 [ApiController]
-public class ColecaoController : Controller
+public sealed class ColecaoController : Controller
 {
 
-  private readonly ColecaoUseCases UseCase;
+  private readonly IColecaoUseCases UseCase;
 
-  public ColecaoController(ColecaoUseCases useCase)
+  public ColecaoController(IColecaoUseCases useCase)
   {
     UseCase = useCase;
   }

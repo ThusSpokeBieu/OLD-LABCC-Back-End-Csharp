@@ -1,18 +1,20 @@
 ﻿using AutoMapper;
 using LABCC.BackEnd.Application.DTO.Colecoes;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Colecoes;
+using LABCC.BackEnd.Domain.Entities.Colecoes.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Colecoes.Params;
 
 namespace LABCC.BackEnd.Application.UseCases;
 
-public class ColecaoUseCases
+public sealed class ColecaoUseCases : IColecaoUseCases
 {
 
-  private readonly ColecaoService Service;
+  private readonly IColecaoService Service;
   private readonly IMapper Mapper;
 
   public ColecaoUseCases(
-    ColecaoService service,
+    IColecaoService service,
     IMapper mapper)
   {
     Service = service;

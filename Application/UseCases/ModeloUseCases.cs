@@ -1,18 +1,20 @@
 ﻿using AutoMapper;
 using LABCC.BackEnd.Application.DTO;
 using LABCC.BackEnd.Application.DTO.Modelos;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Modelos;
+using LABCC.BackEnd.Domain.Entities.Modelos.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Modelos.Params;
 
 namespace LABCC.BackEnd.Application.UseCases;
 
-public class ModeloUseCases
+public sealed class ModeloUseCases : IModeloUseCases
 { 
-  private readonly ModeloService Service;
+  private readonly IModeloService Service;
   private readonly IMapper Mapper;
 
   public ModeloUseCases(
-    ModeloService service,
+    IModeloService service,
     IMapper mapper)
   {
     Service = service;

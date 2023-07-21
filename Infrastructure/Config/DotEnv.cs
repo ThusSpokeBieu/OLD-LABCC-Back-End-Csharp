@@ -20,7 +20,7 @@ public static class DotEnv
   public static void Load() 
   {
     var appRoot = Directory.GetCurrentDirectory();
-    var dotEnv = Path.Combine(appRoot, ".env");
+    var dotEnv = Path.Combine(appRoot, ".devops/.env");
 
     Load(dotEnv);
   }

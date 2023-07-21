@@ -1,15 +1,14 @@
 ﻿using LABCC.BackEnd.Domain.Entities.Colecoes.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Colecoes.Params;
-using LABCC.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LABCC.BackEnd.Domain.Entities.Colecoes;
 
-public class ColecaoService : IColecaoService
+public sealed class ColecaoService : IColecaoService
 {
-  private readonly ColecaoRepository Repo;
+  private readonly IColecaoRepository Repo;
 
-  public ColecaoService(ColecaoRepository repo)
+  public ColecaoService(IColecaoRepository repo)
   {
     Repo = repo;
   }

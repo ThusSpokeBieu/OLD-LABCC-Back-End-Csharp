@@ -1,6 +1,6 @@
 ﻿using LABCC.BackEnd.Application.DTO;
 using LABCC.BackEnd.Application.DTO.Modelos;
-using LABCC.BackEnd.Application.UseCases;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Modelos.Params;
 using LABCC.BackEnd.Domain.Exceptions;
 using LABCC.BackEnd.Domain.ValueObjects;
@@ -11,12 +11,12 @@ namespace LABCC.BackEnd.Application.Controllers;
 
 [Route("api/modelos")]
 [ApiController]
-public class ModeloController : Controller
+public sealed class ModeloController : Controller
 {
 
-  private readonly ModeloUseCases UseCase;
+  private readonly IModeloUseCases UseCase;
 
-  public ModeloController(ModeloUseCases useCase)
+  public ModeloController(IModeloUseCases useCase)
   {
     UseCase = useCase;
   }

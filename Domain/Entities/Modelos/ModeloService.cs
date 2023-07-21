@@ -1,14 +1,15 @@
 ﻿using LABCC.BackEnd.Infrastructure.Repositories;
 using LABCC.BackEnd.Domain.Entities.Modelos.Params;
 using Microsoft.EntityFrameworkCore;
+using LABCC.BackEnd.Domain.Entities.Modelos.Interfaces;
 
 namespace LABCC.BackEnd.Domain.Entities.Modelos;
 
-public class ModeloService
+public sealed class ModeloService : IModeloService
 {
-  private readonly ModeloRepository Repo;
+  private readonly IModeloRepository Repo;
 
-  public ModeloService(ModeloRepository repo)
+  public ModeloService(IModeloRepository repo)
   {
     Repo = repo;
   }

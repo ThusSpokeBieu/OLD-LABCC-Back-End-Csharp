@@ -1,19 +1,20 @@
 ﻿using AutoMapper;
 using LABCC.BackEnd.Application.DTO.Usuarios;
+using LABCC.BackEnd.Application.UseCases.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
 using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Application.UseCases;
 
-public class UsuarioUseCases
+public sealed class UsuarioUseCases : IUsuarioUseCases
   {
 
-    private readonly UsuarioService Service;
+    private readonly IUsuarioService Service;
     private readonly IMapper Mapper;
 
     public UsuarioUseCases(
-      UsuarioService service, 
+      IUsuarioService service, 
       IMapper mapper)
     {
       Service = service;

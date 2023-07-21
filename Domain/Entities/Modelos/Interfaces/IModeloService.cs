@@ -5,4 +5,5 @@ namespace LABCC.BackEnd.Domain.Entities.Modelos.Interfaces;
 
 public interface IModeloService : IBaseService<Modelo, ModeloParams>
 {
+    
 }

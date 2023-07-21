@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LABCC.BackEnd.Domain.Entities.Usuarios;
 
-public class Usuario : Pessoa
+public sealed class Usuario : Pessoa
 {
   [Required]
   [EmailAddress]

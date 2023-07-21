@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace LABCC.BackEnd.Infrastructure.Repositories;
 
-public class UsuarioRepository : IUsuarioRepository
+public sealed class UsuarioRepository : IUsuarioRepository
 {
   private readonly MsSqlContext _db;
   private readonly Regex NotNumeric = RegexConst.NotNumericalDigitRegex();
