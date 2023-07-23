@@ -4,23 +4,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LABCC.BackEnd.Domain.Entities.EntidadesBase;
 
-public abstract class AggregateRoot : Entidade
+public abstract class AggregateRoot<TId> : IEntidade
 {
-  [Key]
-  [Description("Id do usuário")]
-  public virtual long Id { get; set; }
+    [Key]
+    [Description("Id do usuário")]
+    public virtual TId Id { get; set; }
 
-  [Required]
-  [Description("Momento em que a entidade foi atualizada.")]
-  public virtual DateTimeOffset AtualizadoEm { get; set; }
+    [Required]
+    [Description("Momento em que a entidade foi atualizada.")]
+    public virtual DateTimeOffset AtualizadoEm { get; set; }
 
-  [Required]
-  [Description("Momento em que a entidade foi criada.")]
-  public virtual DateTimeOffset CriadoEm { get; set; }
+    [Required]
+    [Description("Momento em que a entidade foi criada.")]
+    public virtual DateTimeOffset CriadoEm { get; set; }
 
-  [Description("Flag indicando se a entidade está ativa: 0 - Inativo, 1 - Ativo.")]
-  public virtual byte StatusId { get; set; }
+    [Description("Flag indicando se a entidade está ativa: 0 - Inativo, 1 - Ativo.")]
+    public virtual byte StatusId { get; set; }
 
-  public virtual Status? Status { get; set; }
-
+    public virtual Status? Status { get; set; }
 }

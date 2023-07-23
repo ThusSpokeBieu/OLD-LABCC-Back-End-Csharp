@@ -28,7 +28,9 @@ public class UsuarioParamsWithoutDefault : IParams
     public string? TipoDeUsuario { get; set; }
 
     [MaxLength(18, ErrorMessage = " {0} deve possuir no máximo 18 caracteres. ")]
-    [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ válido do formato: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX'.")]
+    [CpfOrCnpjDocument(
+        ErrorMessage = "{0} deve ser um CPF ou CNPJ válido do formato: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX'."
+    )]
     public string? CpfOuCnpj { get; set; }
 
     [JsonIgnore]
@@ -41,7 +43,9 @@ public class UsuarioParamsWithoutDefault : IParams
     public DateOnly? DataDeNascimento { get; set; }
 
     [MaxLength(16, ErrorMessage = " {0} deve possuir no máximo 16 caracteres. ")]
-    [BrazilPhoneNumber(ErrorMessage = "O {0} deve ser um número brasileiro válido: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX")]
+    [BrazilPhoneNumber(
+        ErrorMessage = "O {0} deve ser um número brasileiro válido: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX"
+    )]
     public string? Telefone { get; set; }
 
     [JsonIgnore]

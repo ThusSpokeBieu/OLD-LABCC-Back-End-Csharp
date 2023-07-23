@@ -9,109 +9,108 @@ using LABCC.BackEnd.Domain.Entities.Modelos.Params;
 namespace LABCC.BackEnd.Application.UseCases;
 
 public sealed class ModeloUseCases : IModeloUseCases
-{ 
-  private readonly IModeloService Service;
-  private readonly IMapper Mapper;
+{
+    private readonly IModeloService Service;
+    private readonly IMapper Mapper;
 
-  public ModeloUseCases(
-    IModeloService service,
-    IMapper mapper)
-  {
-    Service = service;
-    Mapper = mapper;
-  }
-
-  async public Task<ICollection<ModeloDTOResponse>> GetAll()
-  {
-    try
+    public ModeloUseCases(IModeloService service, IMapper mapper)
     {
-      var ModeloLista = await Service.SelectAll();
-      return Mapper.Map<List<ModeloDTOResponse>>(ModeloLista);
-
+        Service = service;
+        Mapper = mapper;
     }
-    catch (Exception e)
+
+    public async Task<ICollection<ModeloDTOResponse>> GetAll()
     {
-      throw new Exception(e.Message);
+        try
+        {
+            var ModeloLista = await Service.SelectAll();
+            return Mapper.Map<List<ModeloDTOResponse>>(ModeloLista);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
-  }
 
-  async public Task<ICollection<ModeloDTOResponse>> GetAll(ModeloParams @params)
-  {
-    try
+    public async Task<ICollection<ModeloDTOResponse>> GetAll(ModeloParams @params)
     {
-      var modeloLista = await Service.SelectAll(@params);
-      return Mapper.Map<List<ModeloDTOResponse>>(modeloLista);
-
+        try
+        {
+            var modeloLista = await Service.SelectAll(@params);
+            return Mapper.Map<List<ModeloDTOResponse>>(modeloLista);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
     }
-    catch (Exception e)
+
+    public async Task<ModeloDTOResponse> GetById(long id)
     {
-      throw new Exception(e.Message);
-    }
-  }
+        try
+        {
+            var modelo = await Service.SelectOneById(id);
 
-  async public Task<ModeloDTOResponse> GetById(long id)
-  {
-    try
+            if (modelo == null)
+                return null;
+
+            return Mapper.Map<ModeloDTOResponse>(modelo);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<ModeloDTOResponse> Create(ModeloDTO newCollection)
     {
-      var modelo = await Service.SelectOneById(id);
+        try
+        {
+            var collection = Mapper.Map<Modelo>(newCollection);
 
-      if (modelo == null) return null;
-
-      return Mapper.Map<ModeloDTOResponse>(modelo);
+            var persistedCollection = await Service.Add(collection);
+            if (persistedCollection == null)
+                return null;
+            return Mapper.Map<ModeloDTOResponse>(persistedCollection);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"{e.Message}");
+        }
     }
-    catch (Exception e)
+
+    public async Task<ModeloDTOResponse> FindFirstByParams(ModeloParams param)
     {
-      throw new Exception(e.Message);
+        try
+        {
+            var modelo = await Service.FindFirstByParams(param);
+            if (modelo == null)
+                return null;
+            return Mapper.Map<ModeloDTOResponse>(modelo);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"{e.Message}");
+        }
     }
-  }
 
-  async public Task<ModeloDTOResponse> Create(ModeloDTO newCollection)
-  {
-    try
+    public async Task<ModeloDTOResponse?> Update(long id, ModeloParams @params)
     {
-      var collection = Mapper.Map<Modelo>(newCollection);
+        try
+        {
+            await Service.Update(id, @params);
+            var modeloAtualizado = await Service.SelectOneById(id);
 
-      var persistedCollection = await Service.Add(collection);
-      if (persistedCollection == null) return null;
-      return Mapper.Map<ModeloDTOResponse>(persistedCollection);
+            return Mapper.Map<ModeloDTOResponse>(modeloAtualizado);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"{e.Message}");
+        }
     }
-    catch (Exception e)
-    {
-      throw new Exception($"{e.Message}");
-    }
-  }
 
-  async public Task<ModeloDTOResponse> FindFirstByParams(ModeloParams param)
-  {
-    try
+    public async Task Delete(long id)
     {
-      var modelo = await Service.FindFirstByParams(param);
-      if (modelo == null) return null;
-      return Mapper.Map<ModeloDTOResponse>(modelo);
+        await Service.Delete(id);
     }
-    catch (Exception e)
-    {
-      throw new Exception($"{e.Message}");
-    }
-  }
-
-  async public Task<ModeloDTOResponse?> Update(long id, ModeloParams @params)
-  {
-    try
-    {
-      await Service.Update(id, @params);
-      var modeloAtualizado = await Service.SelectOneById(id);
-
-      return Mapper.Map<ModeloDTOResponse>(modeloAtualizado);
-    }
-    catch (Exception e)
-    {
-      throw new Exception($"{e.Message}");
-    }
-  }
-
-  public async Task Delete(long id)
-  {
-    await Service.Delete(id);
-  }
 }

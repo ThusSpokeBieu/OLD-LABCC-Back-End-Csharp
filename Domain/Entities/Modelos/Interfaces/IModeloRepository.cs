@@ -3,6 +3,4 @@ using LABCC.BackEnd.Domain.Entities.Modelos.Params;
 
 namespace LABCC.BackEnd.Domain.Entities.Modelos.Interfaces;
 
-public interface IModeloRepository : IBaseRepository<Modelo, ModeloParams>
-{
-}
+public interface IModeloRepository : IBaseRepository<Modelo, ModeloParams, long> { }

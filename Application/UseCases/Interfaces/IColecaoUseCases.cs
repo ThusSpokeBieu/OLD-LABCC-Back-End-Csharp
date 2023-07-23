@@ -13,4 +13,3 @@ public interface IColecaoUseCases
     public Task<ColecaoDTOResponse?> Update(long id, ColecaoParams @params);
     public Task Delete(long id);
 }
-    

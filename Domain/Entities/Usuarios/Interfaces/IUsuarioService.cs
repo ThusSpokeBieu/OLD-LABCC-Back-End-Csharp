@@ -2,8 +2,9 @@
 using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Domain.Entities.Usuarios.Interfaces;
-public interface IUsuarioService : IBaseService<Usuario, UsuarioParams>
+
+public interface IUsuarioService : IBaseService<Usuario, UsuarioParams, string>
 {
-  Task<Usuario> SelectOneByQueryParams(UsuarioParams param);
-  Task<IList<Usuario>> SelectAllByQueryParams(UsuarioParams param);
+    Task<Usuario?> SelectOneByQueryParams(UsuarioParams param);
+    Task<IList<Usuario>?> SelectAllByQueryParams(UsuarioParams param);
 }

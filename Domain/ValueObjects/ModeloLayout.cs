@@ -7,16 +7,16 @@ namespace LABCC.BackEnd.Domain.ValueObjects;
 
 public class ModeloLayout : ValueObject
 {
-  [JsonIgnore]
-  public byte Id { get; set; }
+    [JsonIgnore]
+    public byte Id { get; set; }
 
-  [Required]
-  [TipoDeModelo]
-  [DefaultValue("Bermuda")]
-  [JsonPropertyName("Layout")]
-  public override string Value
-  {
-    get => base.Value;
-    set => base.Value = value;
-  }
+    [Required]
+    [TipoDeModelo]
+    [DefaultValue("Bermuda")]
+    [JsonPropertyName("Layout")]
+    public override string Value
+    {
+        get => base.Value;
+        set => base.Value = value;
+    }
 }

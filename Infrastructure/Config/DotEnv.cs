@@ -2,26 +2,29 @@
 
 public static class DotEnv
 {
-  public static void Load(string filePath)
-  {
-    if (!File.Exists(filePath)) 
-      throw new FileNotFoundException(".env não foi encontrado, por favor, crie o arquivo na pasta raíz");
-
-    foreach( var line in File.ReadAllLines(filePath) )
+    public static void Load(string filePath)
     {
-      var parts = line.Split('=', StringSplitOptions.RemoveEmptyEntries);
+        if (!File.Exists(filePath))
+            throw new FileNotFoundException(
+                ".env não foi encontrado, por favor, crie o arquivo na pasta raíz"
+            );
 
-      if (parts.Length != 2) continue;
+        foreach (var line in File.ReadAllLines(filePath))
+        {
+            var parts = line.Split('=', StringSplitOptions.RemoveEmptyEntries);
 
-      Environment.SetEnvironmentVariable(parts[0], parts[1]);
+            if (parts.Length != 2)
+                continue;
+
+            Environment.SetEnvironmentVariable(parts[0], parts[1]);
+        }
     }
-  }
 
-  public static void Load() 
-  {
-    var appRoot = Directory.GetCurrentDirectory();
-    var dotEnv = Path.Combine(appRoot, ".devops/.env");
+    public static void Load()
+    {
+        var appRoot = Directory.GetCurrentDirectory();
+        var dotEnv = Path.Combine(appRoot, ".env");
 
-    Load(dotEnv);
-  }
+        Load(dotEnv);
+    }
 }

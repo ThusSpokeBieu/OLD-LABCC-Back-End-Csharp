@@ -9,9 +9,8 @@ namespace LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 public class UsuarioParams : IParams
 {
-
     [JsonIgnore]
-    public long? Id { get; set; }
+    public string? Id { get; set; }
 
     [MaxLength(80, ErrorMessage = " {0} deve possuir no máximo 80 caracteres. ")]
     [DefaultValue("John Doe")]
@@ -32,7 +31,9 @@ public class UsuarioParams : IParams
     public string? TipoDeUsuario { get; set; }
 
     [MaxLength(18, ErrorMessage = " {0} deve possuir no máximo 18 caracteres. ")]
-    [CpfOrCnpjDocument(ErrorMessage = "{0} deve ser um CPF ou CNPJ válido do formato: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX'.")]
+    [CpfOrCnpjDocument(
+        ErrorMessage = "{0} deve ser um CPF ou CNPJ válido do formato: 'XXX.XXX.XXX-XX' ou 'XX.XXX.XXX/XXXX.XX'."
+    )]
     [DefaultValue("366.203.753-08")]
     public string? CpfOuCnpj { get; set; }
 
@@ -48,7 +49,9 @@ public class UsuarioParams : IParams
     public DateOnly? DataDeNascimento { get; set; }
 
     [MaxLength(16, ErrorMessage = " {0} deve possuir no máximo 16 caracteres. ")]
-    [BrazilPhoneNumber(ErrorMessage = "O {0} deve ser um número brasileiro válido: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX")]
+    [BrazilPhoneNumber(
+        ErrorMessage = "O {0} deve ser um número brasileiro válido: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX"
+    )]
     [DefaultValue("(61) 99900-5764")]
     public string? Telefone { get; set; }
 

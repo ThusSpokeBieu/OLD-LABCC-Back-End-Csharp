@@ -1,34 +1,35 @@
-﻿
-namespace LABCC.BackEnd.Utils;
+﻿namespace LABCC.BackEnd.Utils;
 
 public static class StringEnumConverter
 {
-  public static Enum StringToEnum(string source, Type target) 
-  {
-    return (Enum)Enum.Parse(target, source, true);
-  }
-
-  public static string EnumToString(Enum source)
-  {
-    return source.ToString();
-  }
-
-  public static byte StringToEnumByteIndex(string source, Type enumType)
-  {
-    if (!enumType.IsEnum)
+    public static Enum StringToEnum(string source, Type target)
     {
-      throw new ArgumentException("O tipo fornecido não é um Enum válido.");
+        return (Enum)Enum.Parse(target, source, true);
     }
 
-    object enumValue = Enum.Parse(enumType, source, ignoreCase: true);
-
-    if (!Enum.IsDefined(enumType, enumValue))
+    public static string EnumToString(Enum source)
     {
-      throw new ArgumentException("A string fornecida não corresponde a nenhum valor válido do Enum.");
+        return source.ToString();
     }
 
-    byte enumIndex = (byte)enumValue;
+    public static byte StringToEnumByteIndex(string source, Type enumType)
+    {
+        if (!enumType.IsEnum)
+        {
+            throw new ArgumentException("O tipo fornecido não é um Enum válido.");
+        }
 
-    return enumIndex;
-  }
+        object enumValue = Enum.Parse(enumType, source, ignoreCase: true);
+
+        if (!Enum.IsDefined(enumType, enumValue))
+        {
+            throw new ArgumentException(
+                "A string fornecida não corresponde a nenhum valor válido do Enum."
+            );
+        }
+
+        byte enumIndex = (byte)enumValue;
+
+        return enumIndex;
+    }
 }
