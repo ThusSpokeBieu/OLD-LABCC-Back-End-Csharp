@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization.Metadata;
 using LABCC.BackEnd.Application.UseCases;
 using LABCC.BackEnd.Domain.Entities.Usuarios;
 using LABCC.BackEnd.Infrastructure.Config;
@@ -39,6 +40,11 @@ builder.Services.AddScoped<IModeloService, ModeloService>();
 builder.Services.AddScoped<IModeloUseCases, ModeloUseCases>();
 builder.Services.AddAutoMapper(typeof(ModeloMapper));
 
+builder.Services.AddOutputCache(options =>
+{
+  options.AddBasePolicy(c => c.Cache());
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -58,6 +64,8 @@ using (var scope = app.Services.CreateScope())
   var context = services.GetRequiredService<MsSqlContext>();
   context.Database.EnsureCreated();
 }
+
+app.UseOutputCache();
 
 app.UseHttpsRedirection();
 

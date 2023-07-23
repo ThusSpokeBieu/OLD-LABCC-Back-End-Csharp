@@ -5,7 +5,7 @@ using LABCC.BackEnd.Domain.Validators.DataTypeAttributes;
 
 namespace LABCC.BackEnd.Application.DTO.Usuarios;
 
-public class UsuarioDTO 
+public sealed class UsuarioDTO 
 {
   [Required(ErrorMessage = "{0} é obrigatório")]
   [EmailAddress(ErrorMessage = "Por favor, insira um {0} correto.")]

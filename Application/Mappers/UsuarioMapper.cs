@@ -7,7 +7,7 @@ using LABCC.BackEnd.Domain.Entities.Usuarios.Params;
 
 namespace LABCC.BackEnd.Application.Mappers;
 
-public class UsuarioMapper : Profile
+public sealed class UsuarioMapper : Profile
 {
   public UsuarioMapper()
   {

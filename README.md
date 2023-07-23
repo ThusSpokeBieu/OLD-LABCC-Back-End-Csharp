@@ -21,8 +21,8 @@ Aplicação para estudo desenvolvida durante o curso DevInHouse - turma Audaces.
 ## Dependências e Tecnologias.
 
 - [C#](https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/)
-- [.NET Core 7.0](https://dotnet.microsoft.com/pt-br/)
-- [Entity Framework Core 7.0.8](https://learn.microsoft.com/en-us/ef/core/)
+- [.NET Core 8.0](https://dotnet.microsoft.com/pt-br/)
+- [Entity Framework Core 8.0.0-preview.6.23329](https://learn.microsoft.com/en-us/ef/core/)
 - [AutoMapper (12.0.1)](https://automapper.org/)
 - [FluentValidation (11.5.2)](https://docs.fluentvalidation.net/en/latest/)
 - [SQL Server 2022](https://www.microsoft.com/pt-br/sql-server/sql-server-2022)

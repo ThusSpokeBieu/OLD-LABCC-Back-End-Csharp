@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace LABCC.BackEnd.Application.DTO.Colecoes;
 
-public class ColecaoDTOResponse
+public sealed class ColecaoDTOResponse
 
 {
   [DefaultValue(1)]

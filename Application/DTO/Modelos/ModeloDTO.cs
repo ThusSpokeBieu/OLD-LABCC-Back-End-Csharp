@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace LABCC.BackEnd.Application.DTO;
 
-public class ModeloDTO
+public sealed class ModeloDTO
 {
   [Required(ErrorMessage = "{0} é obrigatório.")]
   [MaxLength(50, ErrorMessage = " {0} deve possuir no máximo 50 caracteres. ")]

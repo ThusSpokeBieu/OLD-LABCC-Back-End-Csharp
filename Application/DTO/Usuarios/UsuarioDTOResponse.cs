@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace LABCC.BackEnd.Application.DTO.Usuarios;
 
-public class UsuarioDTOResponse
+public sealed class UsuarioDTOResponse
 {
   [Required]
   [DefaultValue(12)]

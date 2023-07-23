@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LABCC.BackEnd.Application.DTO.Colecoes;
 
-public class ColecaoDTO
+public sealed class ColecaoDTO
 {
   [Required(ErrorMessage = "{0} é obrigatório.")]
   [MaxLength(30, ErrorMessage = " {0} deve possuir no máximo 30 caracteres. ")]

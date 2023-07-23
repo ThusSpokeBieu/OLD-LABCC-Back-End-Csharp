@@ -5,7 +5,7 @@ using LABCC.BackEnd.Application.DTO.Colecoes;
 
 namespace LABCC.BackEnd.Application.DTO.Modelos;
 
-public class ModeloDTOResponse
+public sealed class ModeloDTOResponse
 {
   [Required(ErrorMessage = "{0} é obrigatório.")]
   [MaxLength(50, ErrorMessage = " {0} deve possuir no máximo 50 caracteres. ")]

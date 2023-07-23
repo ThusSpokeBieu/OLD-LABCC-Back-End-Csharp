@@ -9,7 +9,7 @@ using LABCC.BackEnd.Utils;
 
 namespace LABCC.BackEnd.Application.Mappers;
 
-public class ModeloMapper : Profile
+public sealed class ModeloMapper : Profile
 {
   public ModeloMapper()
   {

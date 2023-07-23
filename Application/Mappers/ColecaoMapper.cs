@@ -6,7 +6,7 @@ using LABCC.BackEnd.Utils;
 
 namespace LABCC.BackEnd.Application.Mappers;
 
-public class ColecaoMapper : Profile
+public sealed class ColecaoMapper : Profile
 {
 
   public ColecaoMapper() 
